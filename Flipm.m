@@ -181,7 +181,14 @@ classdef Flipm < handle
     end
 
     function updateState(this )
-     this.q = this.A*this.q + this.B*this.z_dot(1);
+        if this.axis == 1
+            % x-axis dynamics
+            % This is discrete dynamics so 5e-3 means 0.5m/s^2 * 0.01sec
+            this.q = this.A*this.q + this.B*this.z_dot(1)+[0; 0; 5e-3; 0; 5e-3];
+        else
+            % y-axis dynamics
+            this.q = this.A*this.q + this.B*this.z_dot(1)+[0; 0; 0; 0; 0];
+        end
 
      this.za = this.q(2)  + 1/(this.m1*this.omega^2)* ...
      (this.b*(this.q(3) - this.q(5)) + this.k*(this.q(2) -this.q(4)));

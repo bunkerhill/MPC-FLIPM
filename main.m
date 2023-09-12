@@ -9,9 +9,9 @@ clear all; close all;
 method = "approximate"; % approximate inverse
 method = "exact";
 
-delta = 0.02; % time step
-N = 50; % preview window
+delta = 0.01; % time step
+N = 100; % preview window
 fM = FlipManager('exact', delta, N);
 %also on console
-fM.cycle(); %main computation
+fM.cycle(100); %main computation
 fM.plotSystemEvolution(); %graphical front end
